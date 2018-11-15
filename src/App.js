@@ -8,6 +8,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import StartupsList from './components/StartupsList';
+import StartupDetails from './components/StartupDetails';
 import { Route } from 'react-router-dom';
 
 const styles = theme => ({
@@ -61,7 +62,42 @@ class App extends Component {
 					</Grid>
 				</div>
 			)}
+
 		/>
+		<Route path='/:startup' render={({ location, match }) => (
+			<Grid className={classes.root} spacing={0}>
+				<QueryRenderer
+					environment={environment}
+					query={graphql`
+					query AppQuery {
+						allStartups {
+							name
+							teamCount
+							description
+							imageUrl
+							annualReceipt
+							Segment {
+								name
+								code
+							}
+						}
+					}
+					`}
+					variables={{}}
+					render={({error, props}) => {
+						if (error) {
+							return <div>Error!</div>;
+						}
+						if (!props) {
+							return <Loading />;
+						} else {
+							const { allStartups } = props;
+							return <StartupDetails allStartups={allStartups} params={match.params}/>;
+						}
+					}}
+				/>
+			</Grid>
+		)}/>
 	</div>
     );
   }

@@ -32,9 +32,9 @@
 }
 
 .startup {
-  min-width: 500px;
+  min-width: 300px;
+  max-width: 100vw;
 }
-
 .details {
   padding: 12px;
 }
@@ -44,8 +44,18 @@
 .error {
   position: relative;
   top: 40vh;
-  left: 45vw;
-
+  left: 40vw;
   z-index: 10;
 }
+
+.rating-stars {
+  margin: 2px 0px 0px 0px;
+  color: #FDD835;
+}
+
+.rating-stars-rated {
+  margin: 2px 0px 0px 0px;
+  color: #29b6f6;
+}
+
 
