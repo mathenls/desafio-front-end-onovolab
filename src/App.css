@@ -32,7 +32,11 @@
 }
 
 .startup {
-  width: auto;
+  min-width: 500px;
+}
+
+.details {
+  padding: 12px;
 }
 
 /* progress & error */
