@@ -1,0 +1,66 @@
+type ListMetadata {
+  count: Int
+}
+
+type Mutation {
+  createSegment(id: ID!, code: String!, name: String!): Segment
+  updateSegment(id: ID!, code: String, name: String): Segment
+  removeSegment(id: ID!): Boolean
+  createStartup(name: String!, imageUrl: String!, segment_id: ID!, teamCount: Int!, annualReceipt: Int!, description: String!): Startup
+  updateStartup(name: String, imageUrl: String, segment_id: ID, teamCount: Int, annualReceipt: Int, description: String): Startup
+  removeStartup(id: ID!): Boolean
+}
+
+type Query {
+  Segment(id: ID!): Segment
+  allSegments(page: Int, perPage: Int, sortField: String, sortOrder: String, filter: SegmentFilter): [Segment]
+  _allSegmentsMeta(page: Int, perPage: Int, filter: SegmentFilter): ListMetadata
+  Startup(id: ID!): Startup
+  allStartups(page: Int, perPage: Int, sortField: String, sortOrder: String, filter: StartupFilter): [Startup]
+  _allStartupsMeta(page: Int, perPage: Int, filter: StartupFilter): ListMetadata
+}
+
+type Segment {
+  id: ID!
+  code: String!
+  name: String!
+  Startups: [Startup]
+}
+
+input SegmentFilter {
+  q: String
+  ids: [ID]
+  id: ID
+  code: String
+  name: String
+}
+
+type Startup {
+  name: String!
+  imageUrl: String!
+  segment_id: ID!
+  teamCount: Int!
+  annualReceipt: Int!
+  description: String!
+  Segment: Segment
+}
+
+input StartupFilter {
+  q: String
+  ids: [ID]
+  name: String
+  imageUrl: String
+  segment_id: ID
+  teamCount: Int
+  annualReceipt: Int
+  description: String
+  teamCount_lt: Int
+  teamCount_lte: Int
+  teamCount_gt: Int
+  teamCount_gte: Int
+  annualReceipt_lt: Int
+  annualReceipt_lte: Int
+  annualReceipt_gt: Int
+  annualReceipt_gte: Int
+}
+

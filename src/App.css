@@ -30,3 +30,18 @@
     transform: rotate(360deg);
   }
 }
+
+.startup {
+  width: auto;
+}
+
+/* progress & error */
+.progress,
+.error {
+  position: relative;
+  top: 40vh;
+  left: 45vw;
+
+  z-index: 10;
+}
+
