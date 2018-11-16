@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^3.5.1",
+    "@material-ui/icons": "^3.0.1",
     "babel-plugin-relay": "^2.0.0-rc.1",
     "firebase": "^5.5.8",
     "font-awesome": "^4.7.0",

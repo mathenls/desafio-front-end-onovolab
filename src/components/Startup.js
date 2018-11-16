@@ -1,16 +1,21 @@
 import React, { Component } from 'react';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import { Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
+import Avatar from '@material-ui/core/Avatar';
 
 const styles = theme => ({
     card: {
-      boxShadow: '0 0 10px 2px rgba(0,0,0,0.18) !important',
-      margin: '12px',
-      backgroundColor: '#F6F6F7'
+        boxShadow: '0 0 14px 1px rgba(0,0,0,0.20) !important',
+        margin: '12px',
+        backgroundColor: '#F6F6F7',
+        transition: 'transform 0.3s',
+        '&:hover': {
+            transform: 'scale(1.01)',
+            boxShadow: '0 0 24px 4px rgba(0,0,0,0.20) !important',
+        }
     },
     details: {
       display: 'flex',
@@ -22,10 +27,17 @@ const styles = theme => ({
       position: 'relative',
       minWidth: 500
     },
-    cover: {
-      minWidth: 130,
-      minHeight: 200,
-      backgroundSize: 'contain'
+    startupImage: {
+        width: 300,
+        height: 300,
+        margin: '0 auto 8px auto',
+        objectFit: 'cover',
+        border: '2px solid black',
+        transition: 'transform 0.3s',
+        boxShadow: '0 0 14px 0px rgba(0,0,0,0.20) !important',
+        '&:hover': {
+            transform: 'scale(1.05)'
+        }
     },
     title: {
       fontSize: theme.typography.pxToRem(14),
@@ -37,42 +49,47 @@ const styles = theme => ({
         maxWidth: '30ch',
         fontWeight: 'bold'
     },
-    shelfTitle: {
-        textAlign: 'center',
-        fontSize: theme.typography.pxToRem(14)
-    },
     root: {
         flexGrow: 1,
+    },
+    alreadyRated: {
+        color: '#4BB543'
     }
 });
 
 class Startup  extends Component {
     render () {
         const { startup, classes } = this.props;
+        const {name, Segment, rated, imageUrl} = startup;
         const startupRoute = `/${startup.name.replace(/\s/g, '').toLowerCase()}`;
 
         return (
-            <div className="startup">
-                <Card className={classes.card} color="inherit" aria-label="Open drawer">
-                    <div className="details">
-                        <CardMedia
-                            className={classes.cover}
-                            image={startup.imageUrl}
-                            title={startup.name}
-                            component={Link}
-                            to={startupRoute}
-                        />
-                        <CardContent component={Link} to={startupRoute}>
-                            <Typography variant="h4" align="center">
-                                {startup.name}
-                            </Typography>
-                            <Typography variant="h6" color="textSecondary" align="center">
-                                {startup.Segment.name}
-                            </Typography>
-                        </CardContent>
-                    </div>
-                </Card>
-            </div>
+            <Link to={startupRoute} style={{ textDecoration: 'none' }}>
+                <div className="startup">
+                    <Card className={classes.card} color="inherit" aria-label="Open drawer">
+                        <div className="details">
+                            <Avatar src={imageUrl} className={classes.startupImage} />
+                            <CardContent>
+                                <Typography variant="h4" align="center">
+                                    {name}
+                                </Typography>
+                                <Typography variant="h6" color="textSecondary" align="center" paragraph={rated}>
+                                    {Segment.name}
+                                </Typography>
+                                {rated ? (
+                                    <Typography variant="h6" className={classes.alreadyRated} align="center">
+                                        Você já avaliou essa startup
+                                    </Typography>
+                                ) : (
+                                    <Typography variant="h6" color="textSecondary" align="center">
+                                        Você ainda não avaliou essa startup
+                                    </Typography>
+                                )}
+                            </CardContent>
+                        </div>
+                    </Card>
+                </div>
+            </Link>
         );
     }
 }

@@ -32,7 +32,7 @@
 }
 
 .startup {
-  min-width: 300px;
+  min-width: 40vw;
   max-width: 100vw;
 }
 .details {
@@ -44,7 +44,7 @@
 .error {
   position: relative;
   top: 40vh;
-  left: 40vw;
+  left: 50vw;
   z-index: 10;
 }
 
@@ -56,6 +56,10 @@
 .rating-stars-rated {
   margin: 2px 0px 0px 0px;
   color: #29b6f6;
+}
+
+.app-body {
+  padding: 24px;
 }
 
 

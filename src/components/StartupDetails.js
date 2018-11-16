@@ -49,16 +49,22 @@ const styles = theme => ({
         paddingLeft: '16px',
         fontStyle: 'italic',
         position: 'relative',
-        marginLeft: 'auto',
-        marginRight: 'auto',
-        marginTop: '12px',
-        width: '80%'
+        margin: '18px auto 18px auto',
+        width: '50%'
     }
 });
 
-class StartupDetails  extends Component {
+class StartupDetails extends Component {
+    state = {
+        shouldUpdate: false,
+        firebaseRatingId: ''
+    }
+    handleUpdateState = (ratingId) => {
+        this.setState({shouldUpdate: true, firebaseRatingId: ratingId});
+    }
     render () {
         const { allStartups, params, classes } = this.props;
+        const { shouldUpdate, firebaseRatingId } = this.state;
         const startup = allStartups.find(startup => startup.name.replace(/\s/g, '').toLowerCase() === params.startup);
         const reviewTypes = [{
             text: 'Proposta',
@@ -87,11 +93,18 @@ class StartupDetails  extends Component {
                             <Typography variant="h6" color="textSecondary" align="center">
                                 {startup.Segment.name}
                             </Typography>
-                            <Typography variant="body1" className={classes.description} align="left">
+                            <Typography variant="body1" className={classes.description} align="left" paragraph={true}>
                                 {startup.description}
                             </Typography>
                             {reviewTypes.map((type) => (
-                                <RatingComponent key={type.field} type={type} startup={startup} />
+                                <RatingComponent
+                                    key={type.field}
+                                    type={type}
+                                    startup={startup}
+                                    firebaseRatingId={firebaseRatingId}
+                                    shouldUpdate={shouldUpdate}
+                                    handleShouldUpdate={this.handleUpdateState}
+                                />
                             ))}
                         </CardContent>
                     </div>

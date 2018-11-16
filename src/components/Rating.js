@@ -6,52 +6,57 @@ import FirebaseService from "../services/firebaseService";
 class RatingComponent extends Component {
     state = {
         rating: 0,
-        firebaseRatingId: {},
         averageRating: 0,
         ratingsCount: 0,
         rated: false,
         yourRating: 0,
-        shouldUpdate: false
     }
     async componentDidMount() {
-        const rating = localStorage.getItem(`${this.props.startup.name}`);
+        const { name } = this.props.startup;
+        const rating = localStorage.getItem(`${name}`);
+
         if (rating !== null) {
             const data = await FirebaseService.getUniqueDataBy('avaliacoes', rating);
-                this.setState({firebaseRatingId: rating}, () => {
-                this.setState({rating: data[this.props.type.field]}, () => {
-                    if (data.proposta || data.apresentacaoPitch || data.desenvolvimento) {
-                        this.setState({shouldUpdate: true});
-                    }
-                });
-            })
+            this.setState({rating: data[this.props.type.field]}, () => {
+                if (data.proposta || data.apresentacaoPitch || data.desenvolvimento) {
+                    this.props.handleShouldUpdate(rating);
+                }
+            });
         }
     }
     handleChange = async (value) => {
-        this.setState( {
+        this.setState({
             rating: value,
             rated: true
         }, async () => {
-            const { field, text } = this.props.type;
+            const { shouldUpdate, firebaseRatingId } = this.props;
+            const { field } = this.props.type;
             const { name } = this.props.startup;
-            const { firebaseRatingId, shouldUpdate } = this.state;
 
             if (shouldUpdate) {
                 try {
                     await FirebaseService.updateData(firebaseRatingId, 'avaliacoes', field, value);
-                    console.log(`Atualizou avaliacao ${firebaseRatingId}, setando a avaliacao de ${text} para ${value}`);
                 } catch (err) {
                     console.log(err);
                 }
             } else {
-                const newId = await FirebaseService.pushData('avaliacoes', {
-                    [field]: value,
-                    nomeStartup: name
-                });
-                this.setState({shouldUpdate: true}, () => {
-                    console.log(`Criou avaliacao ${newId}, setando a avaliacao de ${text} para ${value}`);
-                    localStorage.setItem(`${name}`, newId);
-                });
+                try {
+                    const newId = await FirebaseService.pushData('avaliacoes', {
+                        [field]: value,
+                        nomeStartup: name
+                    });
+                    this.props.handleShouldUpdate(newId);
+                    this.setNewRatingId(name, newId);
+                } catch (err) {
+                    console.log(err);
+                }
             }
+        });
+    }
+    setNewRatingId = (name, id) => {
+        localStorage.setItem(`${name}`, id);
+        this.setState({
+            firebaseRatingId: id
         });
     }
     handleHover = (value) => {
@@ -68,7 +73,7 @@ class RatingComponent extends Component {
         return (
             <div>
                 <div className={hovered ? 'rating-stars-rated' : 'rating-stars'}>
-                    <Typography variant="h5" color="textSecondary" align="center">
+                    <Typography variant="h5" color="textSecondary" align="center" paragraph={true}>
                         {text}
                     </Typography>
                     <div style={{marginLeft: 'auto', marginRight: 'auto', width: '75%', textAlign: 'center'}}>
@@ -78,7 +83,6 @@ class RatingComponent extends Component {
                             onChange={(value) => {this.handleChange(value)}}
                             initialRating={parseFloat(rating)}
                             onHover={(value) => {this.handleHover(value)}}
-                            quiet={!hovered}
                         />
                     </div>
 
