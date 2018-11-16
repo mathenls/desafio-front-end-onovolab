@@ -60,6 +60,16 @@ class StartupDetails  extends Component {
     render () {
         const { allStartups, params, classes } = this.props;
         const startup = allStartups.find(startup => startup.name.replace(/\s/g, '').toLowerCase() === params.startup);
+        const reviewTypes = [{
+            text: 'Proposta',
+            field: 'proposta'
+        }, {
+            text: 'Apresentação / Pitch',
+            field: 'apresentacaoPitch'
+        }, {
+            text: 'Desenvolvimento',
+            field: 'desenvolvimento'
+        }];
 
         return (
             <div className="startup">
@@ -80,9 +90,9 @@ class StartupDetails  extends Component {
                             <Typography variant="body1" className={classes.description} align="left">
                                 {startup.description}
                             </Typography>
-                            <RatingComponent text="Proposta"/>
-                            <RatingComponent text="Apresentação / Pitch"/>
-                            <RatingComponent text="Desenvolvimento"/>
+                            {reviewTypes.map((type) => (
+                                <RatingComponent key={type.field} type={type} startup={startup} />
+                            ))}
                         </CardContent>
                     </div>
                 </Card>

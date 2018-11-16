@@ -32,19 +32,19 @@ class App extends Component {
 						<QueryRenderer
 							environment={environment}
 							query={graphql`
-							query AppQuery {
-								allStartups {
-									name
-									teamCount
-									description
-									imageUrl
-									annualReceipt
-									Segment {
+								query AppQuery {
+									allStartups {
 										name
-										code
+										teamCount
+										description
+										imageUrl
+										annualReceipt
+										Segment {
+											name
+											code
+										}
 									}
 								}
-							}
 							`}
 							variables={{}}
 							render={({error, props}) => {
@@ -65,7 +65,7 @@ class App extends Component {
 
 		/>
 		<Route path='/:startup' render={({ location, match }) => (
-			<Grid className={classes.root} spacing={0}>
+			<Grid className={classes.root}>
 				<QueryRenderer
 					environment={environment}
 					query={graphql`
