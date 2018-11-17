@@ -20,7 +20,7 @@ const StartupsList = (props) => {
 
     return (
         <div>
-            <Typography variant="h5" color="textSecondary" align="center" paragraph={true}>
+            <Typography variant="h6" color="textSecondary" align="center" paragraph={true}>
                 {ratings < allStartups.length ? (
                     <span> <b>{`${ratings}`}</b> de <b>{`${allStartups.length}`}</b> startups avaliadas</span>
                 ) : (

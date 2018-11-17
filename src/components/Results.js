@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import FirebaseService from "../services/firebaseService";
-import List from '@material-ui/core/List';
-import Grid from '@material-ui/core/Grid';
+import Card from '@material-ui/core/Card';
 import Typography from '@material-ui/core/Typography';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import Avatar from '@material-ui/core/Avatar';
+import RankingList from './RankingList';
+
 import { orderBy } from 'lodash';
 
 const styles = theme => ({
@@ -17,7 +15,12 @@ const styles = theme => ({
     },
     grow: {
         flexGrow: 0.2
-    }
+    },
+    card: {
+        boxShadow: '0 0 14px 1px rgba(0,0,0,0.20) !important',
+        margin: '2px',
+        backgroundColor: '#F6F6F7'
+    },
 });
 
 const reviewTypes = [{
@@ -68,30 +71,13 @@ class Results extends Component {
         });
 
         return (
-            <div>
-                <Grid container className={classes.grow} spacing={16}>
-                    {orderedTypes.map((type, index) => (
-                        <Grid item xs={8} key={type.field}>
-                            <List>
-                                <Typography variant="h6" align="center" paragraph={true}>
-                                    {type.text}
-                                </Typography>
-                                {type.ratings.map((startup, position) => (
-                                    <ListItem>
-                                        <Typography variant="h6" align="center">
-                                            {position + 1}º
-                                        </Typography>
-                                        <Avatar src={startup.imageUrl} />
-                                        <ListItemText primary={startup.name} secondary={startup.Segment.name} />
-                                        <Typography variant="h6" align="center" color="textSecondary">
-                                            {startup[type.field]}
-                                        </Typography>
-                                    </ListItem>
-                                ))}
-                            </List>
-                        </Grid>
-                    ))}
-                </Grid>
+            <div className="app-body">
+                <Typography variant="h5" align="center" paragraph={true}>
+                    Resultados
+                </Typography>
+                <Card className={classes.card} color="inherit">
+                    <RankingList orderedTypes={orderedTypes} />
+                </Card>
             </div>
         );
     }

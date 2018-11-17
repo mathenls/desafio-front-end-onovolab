@@ -5,7 +5,7 @@ import graphql from 'babel-plugin-relay/macro';
 import environment from './environment';
 import Loading from './components/Loading';
 import Results from './components/Results';
-import AppTopMenu from './components/AppTopMenu';
+import AppMenu from './components/AppMenu';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import StartupsList from './components/StartupsList';
@@ -31,7 +31,7 @@ class App extends Component {
 			<div>
 				<Route exact path='/' render={() => (
 					<div>
-						<AppTopMenu />
+						<AppMenu />
 						<div className="app-body">
 							<Typography variant="h5" align="center" paragraph={true}>
 								Escolha sua StartUp!
@@ -73,8 +73,8 @@ class App extends Component {
 				)}
 			/>
 			<Route path='/startups/:startup' render={({ match }) => (
-				<div>
-					<AppTopMenu isDetailPage={true}/>
+				<div className="app-body">
+					<AppMenu isDetailPage={true}/>
 					<Grid className={classes.root}>
 						<QueryRenderer
 							environment={environment}
@@ -111,7 +111,7 @@ class App extends Component {
 			)}/>
 			<Route exact path='/resultados' render={() => (
 				<div>
-					<AppTopMenu isDetailPage={true}/>
+					<AppMenu isDetailPage={true}/>
 					<Grid className={classes.root}>
 						<QueryRenderer
 							environment={environment}

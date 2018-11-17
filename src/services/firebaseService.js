@@ -22,12 +22,12 @@ export default class FirebaseService {
         return doc.data();
     };
 
-    static updateData = async (id, node, field, value) => {
+    static updateData = async (id, node, objToSubmit) => {
         const ref = firestore.collection(node).doc(id);
         try {
             await firestore.runTransaction(async t => {
                 await t.get(ref);
-                t.update(ref, { [field]: value });
+                t.update(ref, objToSubmit);
             });
         } catch(err) {
             console.log(err);

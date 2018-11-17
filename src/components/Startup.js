@@ -8,8 +8,9 @@ import Avatar from '@material-ui/core/Avatar';
 
 const styles = theme => ({
     card: {
+        maxWidth: '100vw',
         boxShadow: '0 0 14px 1px rgba(0,0,0,0.20) !important',
-        margin: '12px',
+        margin: '12px auto 12px auto',
         backgroundColor: '#F6F6F7',
         transition: 'transform 0.3s',
         '&:hover': {
@@ -70,7 +71,7 @@ class Startup  extends Component {
                         <div className="details">
                             <Avatar src={imageUrl} className={classes.startupImage} />
                             <CardContent>
-                                <Typography variant="h4" align="center">
+                                <Typography variant="h5" align="center">
                                     {name}
                                 </Typography>
                                 <Typography variant="h6" color="textSecondary" align="center" paragraph={rated}>
