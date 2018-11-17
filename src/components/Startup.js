@@ -61,7 +61,7 @@ class Startup  extends Component {
     render () {
         const { startup, classes } = this.props;
         const {name, Segment, rated, imageUrl} = startup;
-        const startupRoute = `/${startup.name.replace(/\s/g, '').toLowerCase()}`;
+        const startupRoute = `/startups/${startup.name.replace(/\s/g, '').toLowerCase()}`;
 
         return (
             <Link to={startupRoute} style={{ textDecoration: 'none' }}>

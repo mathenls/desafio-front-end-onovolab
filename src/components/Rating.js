@@ -13,7 +13,7 @@ class RatingComponent extends Component {
     }
     async componentDidMount() {
         const { name } = this.props.startup;
-        const rating = localStorage.getItem(`${name}`);
+        const rating = sessionStorage.getItem(`${name}`);
 
         if (rating !== null) {
             const data = await FirebaseService.getUniqueDataBy('avaliacoes', rating);
@@ -54,7 +54,7 @@ class RatingComponent extends Component {
         });
     }
     setNewRatingId = (name, id) => {
-        localStorage.setItem(`${name}`, id);
+        sessionStorage.setItem(`${name}`, id);
         this.setState({
             firebaseRatingId: id
         });

@@ -25,14 +25,15 @@ const styles = theme => ({
     menuButton: {
         '&:hover': {
             fontWeight: '700',
-            transform: 'scale(1.2)',
-            transition: 'transform 0.5s',
+            transform: 'scale(1.1)',
+            transition: 'transform 0.2s',
+            backgroundColor: 'inherit'
         }
     }
 });
 
 const AppTopMenu = (props) => {
-    const { classes, isDetailPage, isResultsPage } = props;
+    const { classes, isDetailPage } = props;
     return (
         <div className={classes.root}>
             <AppBar position="static">

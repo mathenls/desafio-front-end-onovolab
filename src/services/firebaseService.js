@@ -1,6 +1,15 @@
 import { firestore } from '../utils/firebaseUtils'
 
 export default class FirebaseService {
+    static getAll = async (node) => {
+        const ref = firestore.collection(node);
+        const snapshot = await ref.get();
+        let data = [];
+        snapshot.forEach(doc => {
+            data = [...data, doc.data()];
+        });
+        return data;
+    }
     static pushData = async (node, objToSubmit) => {
         const nodeRef = firestore.collection(node);
         const objRef = await nodeRef.add(objToSubmit);

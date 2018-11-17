@@ -14,7 +14,7 @@ const StartupsList = (props) => {
     let { allStartups, classes } = props;
     allStartups = allStartups.map((item) => ({
         ...item,
-        rated: localStorage.getItem(item.name) !== null
+        rated: sessionStorage.getItem(item.name) !== null
     }));
     const ratings = allStartups.filter(startup => startup.rated).length;
 

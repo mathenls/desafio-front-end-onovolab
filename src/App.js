@@ -4,6 +4,7 @@ import { QueryRenderer } from 'react-relay';
 import graphql from 'babel-plugin-relay/macro';
 import environment from './environment';
 import Loading from './components/Loading';
+import Results from './components/Results';
 import AppTopMenu from './components/AppTopMenu';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -11,7 +12,6 @@ import StartupsList from './components/StartupsList';
 import StartupDetails from './components/StartupDetails';
 import { withStyles } from '@material-ui/core/styles';
 import { Route } from 'react-router-dom';
-
 
 const styles = theme => ({
   root: {
@@ -72,7 +72,7 @@ class App extends Component {
 					</div>
 				)}
 			/>
-			<Route path='/:startup' render={({ location, match }) => (
+			<Route path='/startups/:startup' render={({ match }) => (
 				<div>
 					<AppTopMenu isDetailPage={true}/>
 					<Grid className={classes.root}>
@@ -109,6 +109,44 @@ class App extends Component {
 					</Grid>
 				</div>
 			)}/>
+			<Route exact path='/resultados' render={() => (
+				<div>
+					<AppTopMenu isDetailPage={true}/>
+					<Grid className={classes.root}>
+						<QueryRenderer
+							environment={environment}
+							query={graphql`
+								query AppQuery {
+									allStartups {
+										name
+										teamCount
+										description
+										imageUrl
+										annualReceipt
+										Segment {
+											name
+											code
+										}
+									}
+								}
+							`}
+							variables={{}}
+							render={({error, props}) => {
+								if (error) {
+									return <div>Error!</div>;
+								}
+								if (!props) {
+									return <Loading />;
+								} else {
+									const { allStartups } = props;
+									return <Results allStartups={allStartups} />;
+								}
+							}}
+						/>
+					</Grid>
+				</div>
+				)}
+			/>
 		</div>
     );
   }
