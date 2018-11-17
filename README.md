@@ -1,44 +1,36 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Onovolab Junior Front-End Developer Challenge
 
-## Available Scripts
+This is my submission to Onovolab's (an innovative ecosystem and coworking space) Junior Front End challenge.
+It's basically an React WebApp that let's a user rate (1 to 5 stars) StartUps that presented their purposes and products in the Startup Fest event.
+The ratings are stored at a Cloud Firestore database and summarized at the Results page. Locally, the ratings are stored in the sessionStorage, so multiple users can vote in the same device.
 
-In the project directory, you can run:
+TODO:
+    Test the whole app using using react-testing-library and jest-dom
 
-### `npm start`
+## React
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+* react@16.6.3,
+* react-dom@16.6.3,
+* react-relay@1.7.0,
+* react-router-dom@4.3.1,
+* react-scripts@2.1.1,
+* react-testing-library@5.2.3
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+## External Libraries Used
 
-### `npm test`
+* @material-ui/core@3.2.2
+* @material-ui/icons@3.0.1
+* react-rating@1.4.1
+* font-awesome@4.7.0
+* react-debounce-input@3.2.0
+* firebase@5.5.8
+* jest-dom@2.1.1
+* lodash@4.17.11
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Setup
 
-### `npm run build`
+To get started
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+* install all project dependencies with `npm install`
+* start the development server with `npm start` or `yarn start`
+```
