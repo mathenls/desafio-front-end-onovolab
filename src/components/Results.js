@@ -51,7 +51,8 @@ class Results extends Component {
                 ...startup,
                 proposta: proposta !== 'NaN' ? proposta : '0 (Sem avaliações)',
                 apresentacaoPitch: apresentacaoPitch !== 'NaN' ? apresentacaoPitch : '0 (Sem avaliações)',
-                desenvolvimento: desenvolvimento !== 'NaN' ? desenvolvimento : '0 (Sem avaliações)'
+                desenvolvimento: desenvolvimento !== 'NaN' ? desenvolvimento : '0 (Sem avaliações)',
+                numeroDeAvaliacoes: ratings.length
             }
         });
 

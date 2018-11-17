@@ -10,14 +10,14 @@ const RankingList = (props) => {
     return (
         orderedTypes.map((type) => (
             <CardContent style={{padding: 0}}>
-                <Grid container  spacing={16}>
+                <Grid container spacing={16}>
                     <Grid item xs={12} key={type.field}>
                         <List>
                             <Typography variant="h6" align="center" paragraph={true}>
                                 {type.text}
                             </Typography>
-                            {type.ratings.map((startup, position) => (
-                                <RankingListItem startup={startup} position={position} type={type} />
+                            {type.ratings.map((startup, position,) => (
+                                <RankingListItem startup={startup} position={position} type={type} numberOfRatings={startup.numeroDeAvaliacoes} />
                             ))}
                         </List>
                     </Grid>
