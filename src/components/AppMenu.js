@@ -92,7 +92,7 @@ const styles = theme => ({
   },
 });
 
-class PrimarySearchAppBar extends React.Component {
+class AppMenu extends React.Component {
   state = {
     mobileMoreAnchorEl: null,
   };
@@ -174,8 +174,8 @@ class PrimarySearchAppBar extends React.Component {
   }
 }
 
-PrimarySearchAppBar.propTypes = {
+AppMenu.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(PrimarySearchAppBar);
+export default withStyles(styles)(AppMenu);
